@@ -16,7 +16,6 @@ async function getJSON(url) {
 // Get the JSON from the SpaceX and Wikipedia APIs
 async function getRockets(url) {
   const rocketsJSON = await getJSON(url);
-  console.log(rocketsJSON);
   const rockets = rocketsJSON.map(async (rocket) => {
     const name = rocket.name;
     const img = rocket.flickr_images[0];
@@ -24,7 +23,6 @@ async function getRockets(url) {
     const descriptionJSON = await getJSON(wikiUrl + name);
     return { ...descriptionJSON, name, img, url };
   });
-  console.log(rockets);
   return Promise.all(rockets);
 }
 
